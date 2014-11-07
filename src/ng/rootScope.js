@@ -200,20 +200,20 @@ function $RootScopeProvider(){
           // but cache it to allow the VM to optimize lookups.
           if (!this.$$childScopeClass) {
             this.$$childScopeClass = function() {
-              this.$$watchers = this.$$nextSibling =
-                  this.$$childHead = this.$$childTail = null;
-              this.$$listeners = {};
-              this.$$listenerCount = {};
-              this.$id = nextUid();
-              this.$$childScopeClass = null;
+              this['$$watchers'] = this['$$nextSibling'] =
+                  this['$$childHead'] = this['$$childTail'] = null;
+              this['$$listeners'] = {};
+              this['$$listenerCount'] = {};
+              this['$id'] = nextUid();
+              this['$$childScopeClass'] = null;
             };
             this.$$childScopeClass.prototype = this;
           }
           child = new this.$$childScopeClass();
         }
         child['this'] = child;
-        child.$parent = this;
-        child.$$prevSibling = this.$$childTail;
+        child['$parent'] = this;
+        child['$$prevSibling'] = this.$$childTail;
         if (this.$$childHead) {
           this.$$childTail.$$nextSibling = child;
           this.$$childTail = child;
